@@ -4,9 +4,26 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import db, Admin, Complaint
 import os
+import threading
+import time
+import requests
 
 app = Flask(__name__)
 CORS(app)
+
+# Self-pinging to prevent Render sleep
+def keep_alive():
+    url = "https://tejas-indane-backend.onrender.com/" # Your Render URL
+    while True:
+        try:
+            requests.get(url)
+            print("Self-ping successful!")
+        except Exception as e:
+            print(f"Self-ping failed: {e}")
+        time.sleep(840) # Ping every 14 minutes
+
+if os.environ.get('RENDER'):
+    threading.Thread(target=keep_alive, daemon=True).start()
 
 # Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')

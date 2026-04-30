@@ -5,3 +5,4 @@ flask-jwt-extended
 werkzeug
 gunicorn
 psycopg2-binary
+requests
