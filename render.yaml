@@ -2,6 +2,7 @@ services:
   # Flask Backend Service
   - type: web
     name: tejas-indane-backend
+    plan: free
     env: python
     buildCommand: pip install -r backend/requirements.txt
     startCommand: gunicorn --chdir backend app:app
