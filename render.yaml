@@ -9,7 +9,7 @@ services:
       - key: PYTHON_VERSION
         value: 3.10.0
       - key: JWT_SECRET_KEY
-        fromContext: secret
+        value: tejas-indane-secret-key-change-me
 
   # Frontend Static Site
   - type: web
