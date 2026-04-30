@@ -96,12 +96,17 @@ async function loadComplaints() {
                         <span class="badge badge-${c.status.toLowerCase()}">${c.status}</span>
                     </td>
                     <td>
-                        ${c.status === 'Pending' ? 
-                            `<button onclick="updateStatus(${c.id}, 'Resolved')" class="btn-primary btn-sm" style="background: var(--success);">
-                                <i class="fas fa-check"></i> Mark Resolved
-                            </button>` : 
-                            `<span style="color: var(--success); font-weight: 600;"><i class="fas fa-check-double"></i> Done</span>`
-                        }
+                        <div style="display: flex; gap: 8px;">
+                            <button onclick='viewDetails(${JSON.stringify(c)})' class="btn-primary btn-sm" style="background: var(--secondary);">
+                                <i class="fas fa-eye"></i> View
+                            </button>
+                            ${c.status === 'Pending' ? 
+                                `<button onclick="updateStatus(${c.id}, 'Resolved')" class="btn-primary btn-sm" style="background: var(--success);">
+                                    <i class="fas fa-check"></i>
+                                </button>` : 
+                                ``
+                            }
+                        </div>
                     </td>
                 </tr>
             `).join('');
@@ -114,6 +119,63 @@ async function loadComplaints() {
         }
     } catch (error) {
         list.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 40px; color: var(--danger);">Failed to connect to server</td></tr>';
+    }
+}
+
+// Modal & WhatsApp Logic
+let currentComplaint = null;
+
+function viewDetails(complaint) {
+    currentComplaint = complaint;
+    const body = document.getElementById('modalBody');
+    body.innerHTML = `
+        <div class="detail-item">
+            <div class="detail-label">Customer Name</div>
+            <div class="detail-value">${complaint.customer_name}</div>
+        </div>
+        <div class="detail-item" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+                <div class="detail-label">Mobile Number</div>
+                <div class="detail-value">${complaint.mobile_number}</div>
+            </div>
+            <div>
+                <div class="detail-label">Consumer No.</div>
+                <div class="detail-value">${complaint.consumer_number}</div>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Complaint Type</div>
+            <div class="detail-value">${complaint.complaint_type}</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Description</div>
+            <div class="detail-value" style="background: #F8F9FA; padding: 12px; border-radius: 8px; font-size: 0.9rem;">${complaint.description}</div>
+        </div>
+    `;
+    
+    document.getElementById('detailsModal').style.display = 'flex';
+    document.getElementById('whatsappMessage').value = `Hello ${complaint.customer_name}, this is regarding your complaint (${complaint.complaint_type}) at Tejas Indane...`;
+}
+
+function closeModal() {
+    document.getElementById('detailsModal').style.display = 'none';
+}
+
+document.getElementById('sendWhatsAppBtn')?.addEventListener('click', () => {
+    if (!currentComplaint) return;
+    
+    const message = document.getElementById('whatsappMessage').value;
+    const phone = currentComplaint.mobile_number.startsWith('91') ? currentComplaint.mobile_number : `91${currentComplaint.mobile_number}`;
+    
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+});
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('detailsModal');
+    if (event.target == modal) {
+        closeModal();
     }
 }
 
