@@ -9,8 +9,14 @@ app = Flask(__name__)
 CORS(app)
 
 # Configuration
-app.config['SQLALCHEMY_DATABASE_PATH'] = os.path.join(os.getcwd(), 'complaints.db')
-app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{app.config['SQLALCHEMY_DATABASE_PATH']}"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+if app.config['SQLALCHEMY_DATABASE_URI'] and app.config['SQLALCHEMY_DATABASE_URI'].startswith("postgres://"):
+    app.config['SQLALCHEMY_DATABASE_URI'] = app.config['SQLALCHEMY_DATABASE_URI'].replace("postgres://", "postgresql://", 1)
+
+if not app.config['SQLALCHEMY_DATABASE_URI']:
+    app.config['SQLALCHEMY_DATABASE_PATH'] = os.path.join(os.getcwd(), 'complaints.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{app.config['SQLALCHEMY_DATABASE_PATH']}"
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = 'tejas-indane-secret-key-2024' # Change in production
 
