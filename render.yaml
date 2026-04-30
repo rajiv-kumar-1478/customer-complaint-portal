@@ -12,10 +12,10 @@ services:
         fromContext: secret
 
   # Frontend Static Site
-  - type: static_site
+  - type: web
     name: tejaslpg
-    buildCommand: "" # No build step needed for static HTML
-    publishPath: frontend
+    runtime: static
+    staticPublishPath: frontend
     headers:
       - path: /*
         name: Access-Control-Allow-Origin
