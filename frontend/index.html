@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tejas Indane Gramin Vitrak | Complaint Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">
+                <i class="fas fa-fire-alt"></i>
+                <h1>TEJAS INDANE</h1>
+            </a>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#complaint">File Complaint</a>
+                <a href="#contact">Contact</a>
+                <a href="admin.html" class="admin-link"><i class="fas fa-user-shield"></i> Admin</a>
+            </nav>
+            <a href="tel:+919876543210" class="btn-primary">
+                <i class="fas fa-phone-alt"></i> Call Support
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Your Safety, <br><span style="color: var(--primary);">Our Priority.</span></h2>
+                    <p>Register your concerns directly with Tejas Indane Gramin Vitrak. We ensure swift resolution for all LPG services and delivery issues.</p>
+                    <a href="#complaint" class="btn-primary" style="padding: 16px 32px; font-size: 1.1rem;">
+                        Register Complaint <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="complaint" class="complaint-section">
+            <div class="container">
+                <div class="form-card">
+                    <div class="form-header">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <h2>Complaint Registration</h2>
+                        <p>Please provide accurate details for faster resolution</p>
+                    </div>
+                    <form id="complaintForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Customer Full Name *</label>
+                                <input type="text" id="customerName" placeholder="e.g. Rajesh Kumar" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Mobile Number *</label>
+                                <input type="tel" id="mobileNumber" placeholder="10-digit number" pattern="[0-9]{10}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Consumer Number *</label>
+                                <input type="text" id="consumerNumber" placeholder="e.g. CX123456" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Complaint Type *</label>
+                                <select id="complaintType" required>
+                                    <option value="" disabled selected>Select an issue</option>
+                                    <option value="Delivery Delay">Delivery Delay</option>
+                                    <option value="Gas Leakage">Gas Leakage (Urgent)</option>
+                                    <option value="Overcharging">Overcharging</option>
+                                    <option value="Refill Issue">Refill Issue</option>
+                                    <option value="Staff Behavior">Staff Behavior</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group full">
+                                <label>Describe the issue *</label>
+                                <textarea id="description" rows="4" placeholder="Provide details about your complaint..." required></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 16px;">
+                            Submit Complaint
+                        </button>
+                    </form>
+                    <div id="statusMessage" style="margin-top: 20px; text-align: center; display: none;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <i class="fas fa-headset"></i>
+                        <div>
+                            <h3>Customer Care</h3>
+                            <p>1800-2333-555 (Toll Free)</p>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <div>
+                            <h3>Email Us</h3>
+                            <p>support@tejasindane.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Visit Office</h3>
+                            <p>Gramin Vitrak, Main Road, City</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+        <p>&copy; 2024 Tejas Indane Gramin Vitrak. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+services:
+  # Flask Backend Service
+  - type: web
+    name: tejas-indane-backend
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: gunicorn --chdir backend app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
+      - key: JWT_SECRET_KEY
+        fromContext: secret
+
+  # Frontend Static Site
+  - type: static
+    name: tejas-indane-frontend
+    env: static
+    publishPath: frontend
+    headers:
+      - path: /*
+        name: Access-Control-Allow-Origin
+        value: "*"
