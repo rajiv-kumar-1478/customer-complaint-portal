@@ -43,7 +43,7 @@ h1, h2, h3 {
 }
 
 /* Header */
-header {
+.main-header {
     background: var(--glass);
     backdrop-filter: blur(10px);
     height: 80px;
@@ -264,7 +264,7 @@ nav a:hover {
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 24px;
     margin-bottom: 40px;
 }
