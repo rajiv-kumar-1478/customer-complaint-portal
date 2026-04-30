@@ -12,9 +12,9 @@ services:
         fromContext: secret
 
   # Frontend Static Site
-  - type: static
+  - type: static_site
     name: tejas-indane-frontend
-    env: static
+    buildCommand: "" # No build step needed for static HTML
     publishPath: frontend
     headers:
       - path: /*
