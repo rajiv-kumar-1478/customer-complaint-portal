@@ -1,4 +1,4 @@
-const API_URL = 'http://127.0.0.1:5000/api';
+const API_URL = 'https://tejas-indane-backend.onrender.com/api';
 
 document.getElementById('complaintForm').addEventListener('submit', async (e) => {
     e.preventDefault();

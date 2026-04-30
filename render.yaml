@@ -13,7 +13,7 @@ services:
 
   # Frontend Static Site
   - type: static_site
-    name: tejas-indane-frontend
+    name: tejaslpg
     buildCommand: "" # No build step needed for static HTML
     publishPath: frontend
     headers:
