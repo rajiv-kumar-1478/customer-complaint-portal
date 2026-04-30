@@ -36,6 +36,10 @@ with app.app_context():
 
 # --- API Routes ---
 
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({"status": "healthy", "message": "Tejas Indane API is running"}), 200
+
 @app.route('/api/login', methods=['POST'])
 def login():
     data = request.json
